@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\ContactMessage;
+use Illuminate\Support\Facades\Mail;
 
 class ContactMessagesController extends Controller
 {
     public function store()
     {
-        ContactMessage::create($this->validateRequest());
+        $contactMessage = ContactMessage::create($this->validateRequest());
+
+        Mail::to(env('CONTACT_EMAIL'))->send(new ContactMail($contactMessage));
 
         return back()->with('msg-sent', 'Your ,message has been sent successfully');
     }
