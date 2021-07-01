@@ -71,3 +71,9 @@ You should have PHPUnit-compatible unit tests for your application.
 Provide either a database schema file or a programmatic way of creating your database / tables.
  
 The completed work is available in a public git repository for us to checkout and review.
+
+## Configuration required
+
+Use env.example for the env file. It's required for setting the contact email as en env variable. Also thre the database is setup to be sqlite
+
+Please create a sqlite database on /database folder and named it database.sqlite
