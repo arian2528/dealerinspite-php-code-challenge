@@ -119,11 +119,16 @@
                 <p>Remember Guy Smiley?  Yeah, he wants to hear from you.</p>
             </div>
             <div class="text-left col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <form class="contact-form" enctype="multipart/form-data">
+                @if(\Illuminate\Support\Facades\Session::has('msg-sent'))
+                    <div class="alert alert-success" role="alert">
+                        {{\Illuminate\Support\Facades\Session::get('msg-sent')}}
+                    </div>
+                @endif
+                <form method="POST" action="{{route('send.email')}}" class="contact-form" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
-                        <label for="full_name">Full Name *</label>
+                        <label for="name">Full Name *</label>
                         <input type="text" class="form-control" name="name" id="name" value="" required>
                     </div>
 
@@ -138,7 +143,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Message *</label>
+                        <label for="msg">Message *</label>
                         <textarea class="form-control" name="msg" id="msg" rows="10" required></textarea>
                     </div>
 
@@ -147,6 +152,17 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-default">Send</button>
                     </div>
+                    @if(count($errors))
+                        <div class="form-group">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>
