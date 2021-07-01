@@ -1,0 +1,13 @@
+/* make sure text selected in inputs is visible */
+input::selection,
+textarea::selection {
+    background: #ececec;
+    background: #8c8c8c;
+}
+input[disabled]::selection,
+input[readonly]::selection,
+textarea[disabled]::selection,
+textarea[readonly]::selection {
+    background: #dcdcdc;
+    background: #8c8c8c;
+}
